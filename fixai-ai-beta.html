@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>FIXAI AI বিটা</title>
+<style>
+:root{--bg:#f1f3fa;--card:#fff;--tx:#1b2333;--mu:#667085;--pr:#4f46e5;--bd:#e3e7f0;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--card:#1a2133;--tx:#eef1f8;--mu:#9aa5bd;--pr:#818cf8;--bd:#2a3350}}
+:root[data-theme="dark"]{--bg:#0d1220;--card:#1a2133;--tx:#eef1f8;--mu:#9aa5bd;--pr:#818cf8;--bd:#2a3350}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:"Noto Sans Bengali","Hind Siliguri",system-ui,sans-serif;line-height:1.55}
+.w{max-width:440px;margin:0 auto;padding:12px 14px}
+.view{display:none}.view.on{display:block}
+.top{display:flex;gap:10px;align-items:center;padding-bottom:10px;border-bottom:1px solid var(--bd)}
+.av{flex:none;width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,#4f46e5,#06b6d4);display:grid;place-items:center;font-weight:800;font-size:12px;color:#fff}
+.top b{display:block}.top small{color:var(--mu);font-size:12px}
+#msgs{padding:14px 0 90px}
+.r{display:flex;gap:8px;align-items:flex-end;margin-bottom:10px}.r.u{justify-content:flex-end}
+.m{max-width:82%;padding:10px 13px;border-radius:16px;background:var(--card);border:1px solid var(--bd);font-size:14.5px}
+.u .m{background:var(--pr);border-color:var(--pr);color:#fff}
+.m ol{margin:6px 0 0;padding-left:20px}
+.act{flex:none;font:inherit;font-size:11px;line-height:1.3;width:62px;padding:7px 4px;border-radius:14px;border:1px solid var(--pr);background:transparent;color:var(--pr);cursor:pointer;font-weight:600}
+.opts{display:flex;gap:8px;margin-top:10px}.opts button{flex:1;font:inherit;font-size:13px;padding:9px 6px;border-radius:12px;cursor:pointer;border:1px solid var(--bd);background:var(--bg);color:var(--tx)}
+.opts button.go{background:var(--pr);border-color:var(--pr);color:#fff;font-weight:600}
+.sm{font-size:12px;color:var(--mu);margin-top:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.chips button{font:inherit;font-size:13px;border-radius:18px;padding:6px 12px;border:1px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer}
+.dots span{display:inline-block;width:7px;height:7px;margin:0 2px;border-radius:50%;background:var(--mu);animation:bn 1s infinite}.dots span:nth-child(2){animation-delay:.15s}.dots span:nth-child(3){animation-delay:.3s}
+@keyframes bn{50%{transform:translateY(-4px)}}
+.comp{position:sticky;bottom:0;display:flex;gap:8px;padding:10px 0;background:var(--bg)}
+.comp input{flex:1;font:inherit;padding:12px 14px;border-radius:22px;border:1px solid var(--bd);background:var(--card);color:var(--tx);min-width:0}
+.comp button{font:inherit;border:0;border-radius:22px;padding:0 18px;background:var(--pr);color:#fff;font-weight:600;cursor:pointer}
+.bk{font:inherit;font-size:13px;background:none;border:0;color:var(--pr);cursor:pointer;padding:4px 0 10px}
+.pg{display:flex;gap:4px;margin-bottom:10px}.pg i{flex:1;height:5px;border-radius:3px;background:var(--bd)}.pg i.on{background:var(--pr)}
+.phone{background:#0b0f1a;border-radius:38px;padding:10px;box-shadow:0 18px 40px rgba(20,30,80,.28);max-width:340px;margin:0 auto}
+.scr{background:#f6f7fb;color:#1b2333;border-radius:30px;height:560px;position:relative;overflow:hidden}
+.sb{display:flex;justify-content:space-between;padding:10px 18px 4px;font-size:12px;font-weight:600}
+.hd{padding:8px 18px 10px;font-size:20px;font-weight:700}.bd{padding:0 12px 120px}
+.home{background:linear-gradient(160deg,#5b6cf0,#0ea5b7)}.home .sb{color:#fff}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 4px;padding:30px 10px}
+.app{text-align:center;font-size:11px;color:#fff;padding:4px;border-radius:14px}
+.ic{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,.9);display:grid;place-items:center;font-size:24px;margin:0 auto 4px}
+.row{display:flex;align-items:center;gap:12px;background:#fff;border-radius:14px;padding:12px;margin-bottom:8px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.row b{display:block;font-size:14px}.row small{color:#667085;font-size:12px}.re{font-size:20px}.row>div{flex:1}
+.sw{width:42px;height:24px;border-radius:12px;background:#c4c9d6;position:relative;flex:none}
+.sw i{position:absolute;top:3px;left:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
+.sw.on{background:#4f46e5}.sw.on i{left:21px}
+.bar{height:10px;border-radius:5px;background:#dfe3ee;margin-top:8px;overflow:hidden;width:100%}.bar b{display:block;height:100%;background:#4f46e5;font-size:0}
+.tap{cursor:pointer;transition:opacity .2s}.guided .tap:not(.hl){opacity:.45}
+.hl{position:relative;z-index:2;opacity:1!important;box-shadow:0 0 0 3px #4f46e5,0 0 0 9px rgba(79,70,229,.28);animation:pl 1.3s infinite}
+.hl.app{background:rgba(255,255,255,.25)}
+.hl::after{content:"👆 এখানে ট্যাপ করুন";position:absolute;right:6px;top:-13px;background:#4f46e5;color:#fff;font-size:11px;padding:2px 9px;border-radius:10px;white-space:nowrap}
+@keyframes pl{50%{box-shadow:0 0 0 3px #4f46e5,0 0 0 15px rgba(79,70,229,.08)}}
+.coach{position:absolute;left:10px;right:10px;bottom:10px;background:#111827;color:#fff;border-radius:18px;padding:12px 14px;display:flex;gap:10px;align-items:center;z-index:5}
+.coach.ok{background:#0f7a43}.coach.shake{animation:sh .4s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.ct{font-size:13px;flex:1}.ct small{display:block;opacity:.7;font-size:11px}
+.coach button{font:inherit;font-size:12px;border:0;border-radius:10px;padding:7px 10px;background:#fff;color:#0f7a43;cursor:pointer;font-weight:600}
+.nt{background:rgba(255,255,255,.14);border-radius:10px;padding:6px 8px;margin-top:6px;font-size:12px}.coach .lb{background:rgba(255,255,255,.18);color:#fff;font-size:11px;flex:none;max-width:70px}
+.note{text-align:center;font-size:11px;color:var(--mu);margin-top:10px}
+</style>
+</head>
+<body>
+<div class="w">
+<div class="view on" id="v1">
+<div class="top"><div class="av">FX</div><div><b>FIXAI</b><small>Ask. Allow. Done. · AI বিটা</small></div></div>
+<div id="msgs"></div>
+<div class="comp"><input id="in" placeholder="আপনার ফোনের সমস্যা লিখুন..."><button id="sd">পাঠান</button></div>
+</div>
+<div class="view" id="v2">
+<button class="bk" id="bk">← চ্যাটে ফিরুন</button>
+<div class="pg" id="pg"></div>
+<div class="phone"><div class="scr" id="scr"></div></div>
+</div>
+<div class="note">উত্তর আসল AI দেয়। ফোনের স্ক্রিন এখনও সিমুলেশন, তাই আপনার ফোনের কোনো সেটিংস বদলায় না।</div>
+</div>
+<script>
+var SC={
+wifi:{re:/wi|ওয়াই|ইন্টারনেট|নেট/i,r:"Wi‑Fi কানেক্ট আছে কিন্তু ইন্টারনেট চলছে না? এই ধাপগুলো চেষ্টা করুন:",l:["সেটিংস খুলুন","নেটওয়ার্ক ও ইন্টারনেট → Wi‑Fi এ যান","Wi‑Fi বন্ধ করে আবার চালু করুন"],st:[
+{s:"home",t:"settings",x:"প্রথমে \"সেটিংস\" অ্যাপে ট্যাপ করুন"},
+{s:"settings",t:"net",x:"এবার \"নেটওয়ার্ক ও ইন্টারনেট\" এ ট্যাপ করুন"},
+{s:"net",t:"wifi",x:"\"Wi‑Fi\" এ ট্যাপ করুন"},
+{s:"wifi",t:"wt",a:0,x:"Wi‑Fi সুইচটি বন্ধ করুন"},
+{s:"wifi",t:"wt",a:2,x:"এবার সুইচটি আবার চালু করুন"}],ok:"Wi‑Fi এখন ঠিকঠাক চলছে। আপনি নিজেই সমাধান করেছেন!"},
+gmail:{re:/gmail|জিমেইল|ইমেইল|মেইল|google/i,r:"নতুন Gmail অ্যাকাউন্ট খুলতে এই ধাপগুলো অনুসরণ করুন:",l:["Gmail অ্যাপ খুলুন","অ্যাকাউন্ট তৈরি করুন","নাম, পাসওয়ার্ড ও ফোন নম্বর দিন","ফোনে আসা কোড নিজে লিখুন"],st:[
+{s:"home",t:"gm",x:"\"Gmail\" অ্যাপে ট্যাপ করুন"},
+{s:"gmail",t:"ca",x:"\"অ্যাকাউন্ট তৈরি করুন\" এ ট্যাপ করুন"},
+{s:"name",t:"nm",x:"নামের ঘরে ট্যাপ করে আপনার নাম লিখুন"},
+{s:"name",t:"nx",x:"\"পরবর্তী\" এ ট্যাপ করুন"},
+{s:"pw",t:"pwf",x:"পাসওয়ার্ডের ঘরে ট্যাপ করুন",n:"🔒 পাসওয়ার্ড আপনি নিজে লিখবেন। FIXAI এটি দেখে না বা রাখে না।"},
+{s:"pw",t:"nx2",x:"\"পরবর্তী\" এ ট্যাপ করুন"},
+{s:"ph",t:"phf",x:"আপনার ফোন নম্বর লিখুন",n:"📩 Google এই নম্বরে একটি OTP কোড পাঠাতে পারে। ফোনটি হাতের কাছে রাখুন।"},
+{s:"ph",t:"sd",x:"\"কোড পাঠান\" এ ট্যাপ করুন"},
+{s:"otp",t:"vf",p:1,x:"⏸️ কোডটি আপনি নিজে লিখুন",n:"FIXAI আপনার OTP দেখে না। লেখা শেষ হলে \"যাচাই করুন\" এ ট্যাপ করুন।"},
+{s:"terms",t:"ag",x:"শর্তাবলী পড়ে \"আমি সম্মত\" এ ট্যাপ করুন"}],ok:"Gmail অ্যাকাউন্ট তৈরি হয়েছে! পাসওয়ার্ড ও কোড আপনি নিজে দিয়েছেন, তাই আপনার তথ্য আপনার কাছেই থাকল।"},
+bat:{re:/ব্যাটারি|চার্জ|উজ্জ্ব/,r:"ব্যাটারি দ্রুত শেষ হলে আগে স্ক্রিনের উজ্জ্বলতা কমান:",l:["সেটিংস খুলুন","ডিসপ্লে এ যান","উজ্জ্বলতা কমিয়ে দিন"],st:[
+{s:"home",t:"settings",x:"প্রথমে \"সেটিংস\" অ্যাপে ট্যাপ করুন"},
+{s:"settings",t:"disp",x:"\"ডিসপ্লে\" এ ট্যাপ করুন"},
+{s:"disp",t:"br",x:"উজ্জ্বলতার বারে ট্যাপ করে কমিয়ে দিন"}],ok:"উজ্জ্বলতা কমেছে, ব্যাটারি বেশিক্ষণ চলবে!"}};
+var g={},K,sc,i,scr,w,br,done,$=function(id){return document.getElementById(id)};
+/* ---------- চ্যাট ---------- */
+function add(c,h){var d=document.createElement("div");d.className="r "+c;d.innerHTML=h;$("msgs").appendChild(d);d.scrollIntoView({block:"end",behavior:"smooth"});return d}
+function bot(h){return add("b",'<div class="m">'+h+'</div>')}
+function send0(t){t=t.trim();if(!t)return;$("in").value="";add("u",'<div class="m"></div>').firstChild.textContent=t;
+var k=Object.keys(SC).filter(function(x){return SC[x].re.test(t)})[0];
+var ty=bot('<span class="dots"><span></span><span></span><span></span></span>');
+setTimeout(function(){ty.remove();
+if(!k){bot("ডেমোতে এখন Wi‑Fi ও ব্যাটারির সমস্যা বুঝতে পারি। যেমন: \"আমার Wi‑Fi তে ইন্টারনেট নেই\"।");return}
+var s=SC[k];add("b",'<div class="m">'+s.r+'<ol>'+s.l.map(function(x){return "<li>"+x+"</li>"}).join("")+'</ol></div><button class="act" data-a="ask" data-k="'+k+'">🛠️ FIXAI দিয়ে ঠিক করান</button>')},900)}
+$("sd").onclick=function(){send($("in").value)};
+$("in").onkeydown=function(e){if(e.key=="Enter")send($("in").value)};
+$("msgs").addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a;
+if(a=="ask"){b.remove();K=b.dataset.k;bot("আপনি কি এটি আমাদের মাধ্যমে সঠিকভাবে ঠিক করাতে চান?<div class=\"sm\">FIXAI শুধু দেখাবে কোথায় ট্যাপ করবেন, ট্যাপ আপনি নিজে করবেন। কোনো পাসওয়ার্ড বা OTP লাগবে না।</div><div class=\"opts\"><button class=\"go\" data-a=\"go\">✅ কাজ শুরু করুন</button><button data-a=\"no\">❌ করাতে চাই না</button></div>")}
+else if(a=="go"||a=="no"){b.parentNode.remove();var go=a=="go";add("u",'<div class="m">'+(go?"কাজ শুরু করুন":"করাতে চাই না")+'</div>');
+if(go)setTimeout(start,500);else bot("ঠিক আছে! ওপরের ধাপগুলো নিজে অনুসরণ করতে পারেন। দরকার হলে আবার বলবেন।")}});
+function chips(){add("b",'<div class="m">হ্যালো! আপনার ফোনে কী সমস্যা হচ্ছে? লিখুন, অথবা নিচের একটি বেছে নিন।<div class="chips"><button data-q="আমার Wi‑Fi তে ইন্টারনেট নেই">Wi‑Fi তে ইন্টারনেট নেই</button><button data-q="ব্যাটারি খুব দ্রুত শেষ হয়">ব্যাটারি দ্রুত শেষ</button></div></div>')}
+$("msgs").addEventListener("click",function(e){var q=e.target.dataset.q;if(q)send(q)});
+/* ---------- গাইডেড ফোন ---------- */
+function T(id,go,b,c){return '<div class="tap '+(c||'')+'" data-id="'+id+'" data-go="'+go+'">'+b+'</div>'}
+function row(id,e,t,s,go){return T(id,go,'<span class="re">'+e+'</span><div><b>'+t+'</b><small>'+s+'</small></div>','row')}
+function app(id,e,l,go){return T(id,go,'<div class="ic">'+e+'</div>'+l,'app')}
+function hd(t){return '<div class="sb"><span>৯:৪১</span><span>📶 🔋</span></div><div class="hd">'+t+'</div>'}
+var V={
+home:function(){return '<div class="home" style="height:100%"><div class="sb"><span>৯:৪১</span><span>📶 🔋</span></div><div class="grid">'+app("a1","📞","ফোন","")+app("gm","✉️","Gmail","gmail")+app("a3","📷","ক্যামেরা","")+app("settings","⚙️","সেটিংস","settings")+app("a5","🌐","ব্রাউজার","")+app("a6","🗺️","ম্যাপ","")+app("a7","🎵","গান","")+app("a8","🖼️","গ্যালারি","")+'</div></div>'},
+settings:function(){return hd("সেটিংস")+'<div class="bd">'+row("net","📡","নেটওয়ার্ক ও ইন্টারনেট","Wi‑Fi, মোবাইল ডেটা","net")+row("disp","🔆","ডিসপ্লে","উজ্জ্বলতা, ডার্ক মোড","disp")+row("bt","🔋","ব্যাটারি","","")+row("snd","🔊","সাউন্ড","","")+'</div>'},
+net:function(){return hd("নেটওয়ার্ক ও ইন্টারনেট")+'<div class="bd">'+row("wifi","📶","Wi‑Fi",["বন্ধ","Home_WiFi · ইন্টারনেট নেই ⚠","Home_WiFi · সংযুক্ত ✓"][w],"wifi")+row("air","✈️","এয়ারপ্লেন মোড","বন্ধ আছে","")+'</div>'},
+wifi:function(){return hd("Wi‑Fi")+'<div class="bd">'+T("wt","",'<div><b>Wi‑Fi ব্যবহার করুন</b></div><span class="sw'+(w?" on":"")+'"><i></i></span>',"row")+(w?row("nw","📶","Home_WiFi",w==2?"সংযুক্ত ✓ ইন্টারনেট আছে":"সংযুক্ত, ইন্টারনেট নেই ⚠",""):"")+'</div>'},
+disp:function(){return hd("ডিসপ্লে")+'<div class="bd">'+T("br","",'<div><b>উজ্জ্বলতা '+br+'%</b><div class="bar"><b style="width:'+br+'%">.</b></div></div>',"row")+row("dm","🌙","ডার্ক মোড","বন্ধ","")+'</div>'}};
+
+function fld(id,l){var v={nm:"রহিম উদ্দিন",pwf:"••••••••",phf:"০১XXXXXXXXX"};return T(id,"",'<div><b>'+l+'</b><small>'+(g[id]?v[id]:"ট্যাপ করে লিখুন")+'</small></div>',"row")}
+function btn(id,go,t){return T(id,go,'<div style="text-align:center;font-weight:700;color:#4f46e5">'+t+'</div>',"row")}
+V.gmail=function(){return hd("Gmail")+'<div class="bd">'+row("ca","✉️","অ্যাকাউন্ট তৈরি করুন","নতুন Google অ্যাকাউন্ট","name")+row("si","🔑","সাইন ইন","আগের অ্যাকাউন্টে","")+'</div>'};
+V.name=function(){return hd("আপনার নাম")+'<div class="bd">'+fld("nm","নাম")+btn("nx","pw","পরবর্তী")+'</div>'};
+V.pw=function(){return hd("পাসওয়ার্ড তৈরি করুন")+'<div class="bd">'+fld("pwf","পাসওয়ার্ড")+btn("nx2","ph","পরবর্তী")+'</div>'};
+V.ph=function(){return hd("ফোন নম্বর")+'<div class="bd">'+fld("phf","ফোন নম্বর")+btn("sd","otp","কোড পাঠান")+'</div>'};
+V.otp=function(){return hd("কোড যাচাই")+'<div class="bd"><div class="row"><span class="re">🔒</span><div><b>৬ সংখ্যার কোড</b><small>মেসেজ থেকে নিজে লিখুন</small></div></div>'+btn("vf","terms","যাচাই করুন")+'</div>'};
+V.terms=function(){return hd("শর্তাবলী")+'<div class="bd">'+btn("ag","","আমি সম্মত")+'</div>'};
+function lost(){$("ctx").innerHTML="ঠিক আছে! আপনার স্ক্রিনে এখন কী দেখছেন লিখুন বা স্ক্রিনশট দিন, আমি নতুন করে খুঁজে নেব।"}
+function start(){sc=SC[K];i=0;scr="home";w=1;br=90;g={};done=0;$("v1").className="view";$("v2").className="view on";window.scrollTo(0,0);draw()}
+function back(ok){$("v2").className="view";$("v1").className="view on";if(ok)bot("🎉 "+sc.ok+" আর কোনো সমস্যা থাকলে লিখুন।")}
+$("bk").onclick=function(){back(0)};
+function draw(){
+$("pg").innerHTML=sc.st.map(function(_,j){return '<i class="'+(j<i||done?"on":"")+'"></i>'}).join("");
+var c=done?'<div class="coach ok"><div class="av">✓</div><div class="ct">'+sc.ok+'</div><button onclick="back(1)">চ্যাটে ফিরুন</button></div>':'<div class="coach" id="co"><div class="av">FX</div><div class="ct" id="ctx">'+sc.st[i].x+(sc.st[i].n?'<div class="nt">'+sc.st[i].n+'</div>':'')+'<small>ধাপ '+(i+1)+'/'+sc.st.length+' · হাইলাইট করা জায়গায় ট্যাপ করুন</small></div><button class="lb" onclick="lost()">স্ক্রিন মিলছে না?</button></div>';
+$("scr").className="scr"+(done||sc.st[i].p?"":" guided");
+$("scr").innerHTML=V[scr]()+c;
+if(!done&&!sc.st[i].p){var e=$("scr").querySelector('[data-id="'+sc.st[i].t+'"]');if(e)e.classList.add("hl")}}
+$("scr").addEventListener("click",function(ev){
+var el=ev.target.closest(".tap");if(!el||done)return;var s=sc.st[i];
+if(el.dataset.id!==s.t){var co=$("co");co.classList.remove("shake");void co.offsetWidth;co.classList.add("shake");$("ctx").innerHTML="ওখানে নয় — হাইলাইট করা অংশে ট্যাপ করুন";setTimeout(function(){if(!done)draw()},1500);return}
+if(el.dataset.go)scr=el.dataset.go;
+if(s.t=="wt")w=s.a;
+if(s.t=="br")br=40;g[s.t]=1;
+i++;if(i>=sc.st.length)done=1;draw()});
+
+/* ---------- আসল AI ---------- */
+var S=null,H=[],AI={steps:[]},n=0;
+if(window.claude&&claude.use)claude.use("sample").then(function(x){S=x}).catch(function(){});
+function esc(t){var d=document.createElement("div");d.textContent=String(t);return d.innerHTML}
+var SYS='You are FIXAI, a friendly Bangla-speaking Android phone troubleshooting assistant. Reply ONLY with JSON, no markdown: {"reply":"short friendly Bengali answer, 1-2 sentences","steps":["up to 6 short Bengali steps, one action each"],"category":"wifi | battery | gmail | other"}. category=gmail if about creating or signing in to a Gmail or Google account, category=wifi if about Wi-Fi or internet connection, battery if about battery drain or screen brightness, otherwise other. Never ask for passwords, OTPs or PINs. Never suggest factory reset or deleting data without a clear warning. If the message is not a phone problem, or you need more info, set steps to [] and answer or ask ONE short question in reply.';
+function send(t){t=t.trim();if(!t)return;
+if(!S){send0(t);return}
+$("in").value="";add("u",'<div class="m"></div>').firstChild.textContent=t;
+var ty=bot('<span class="dots"><span></span><span></span><span></span></span>');
+H.push("ব্যবহারকারী: "+t);
+S.json(SYS+"\n\nকথোপকথন:\n"+H.slice(-6).join("\n"),{cache:false}).then(function(r){
+ty.remove();var st=(r.steps||[]).slice(0,6),k=r.category;H.push("FIXAI: "+r.reply);
+var h='<div class="m">'+esc(r.reply||"")+(st.length?'<ol>'+st.map(function(x){return "<li>"+esc(x)+"</li>"}).join("")+'</ol>':"")+'</div>';
+if(st.length){AI.steps=st;K=k=="battery"?"bat":(k=="wifi"||k=="gmail")?k:"other";h+='<button class="act" data-a="ask" data-k="'+K+'">🛠️ FIXAI দিয়ে ঠিক করান</button>'}
+add("b",h)}).catch(function(e){ty.remove();bot(e&&e.code=="not_granted"?"AI ব্যবহারের অনুমতি দিলে আমি উত্তর দিতে পারব।":"দুঃখিত, এই মুহূর্তে AI-র সাথে সংযোগ হয়নি। একটু পরে আবার চেষ্টা করুন।")})}
+var start1=start;
+start=function(){if(SC[K])return start1();n=0;step2()};
+function step2(){if(n>=AI.steps.length){bot("🎉 সবগুলো ধাপ শেষ! সমস্যাটা কি ঠিক হয়েছে? না হলে লিখুন এখন কী হচ্ছে।");return}
+bot('<b>ধাপ '+(n+1)+'/'+AI.steps.length+'</b><br>'+esc(AI.steps[n])+'<div class="sm">আসল অ্যাপে এখানে ফোনের স্ক্রিনে হাইলাইট দেখাবে।</div><div class="opts"><button class="go" data-a="dn">✅ হয়ে গেছে</button><button data-a="cant">❓ পারছি না</button></div>')}
+$("msgs").addEventListener("click",function(e){var b=e.target.closest("[data-a]");if(!b)return;var a=b.dataset.a;if(a!="dn"&&a!="cant")return;b.parentNode.remove();
+if(a=="dn"){add("u",'<div class="m">হয়ে গেছে</div>');n++;setTimeout(step2,400)}else send("আমি এই ধাপটা করতে পারছি না: "+AI.steps[n])});
+chips();
+</script>
+</body>
+</html>
