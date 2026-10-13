@@ -61,19 +61,6 @@ cat > app/src/main/AndroidManifest.xml <<'FIXAI_EOF'
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service
-            android:name=".FixaiService"
-            android:exported="false"
-            android:label="@string/app_name"
-            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
-            <intent-filter>
-                <action android:name="android.accessibilityservice.AccessibilityService" />
-            </intent-filter>
-            <meta-data
-                android:name="android.accessibilityservice"
-                android:resource="@xml/accessibility_config" />
-        </service>
     </application>
 </manifest>
 FIXAI_EOF
@@ -441,22 +428,11 @@ public class FixaiService extends AccessibilityService {
     }
 }
 FIXAI_EOF
-mkdir -p app/src/main/res/xml
-cat > app/src/main/res/xml/accessibility_config.xml <<'FIXAI_EOF'
-<?xml version="1.0" encoding="utf-8"?>
-<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
-    android:accessibilityEventTypes="typeWindowStateChanged|typeWindowContentChanged|typeViewClicked"
-    android:accessibilityFeedbackType="feedbackGeneric"
-    android:accessibilityFlags="flagDefault"
-    android:canRetrieveWindowContent="true"
-    android:notificationTimeout="150"
-    android:description="@string/svc_desc" />
-FIXAI_EOF
 mkdir -p app/src/main/res/values
 cat > app/src/main/res/values/strings.xml <<'FIXAI_EOF'
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">FIXAI</string>
+    <string name="app_name">FIXAI Test</string>
     <string name="svc_desc">FIXAI শুধু ফোনের সেটিংস অ্যাপে কোন বোতামে ট্যাপ করবেন তা হাইলাইট করে দেখায়। এটি নিজে ট্যাপ করে না, পাসওয়ার্ড বা OTP পড়ে না।</string>
 </resources>
 FIXAI_EOF
